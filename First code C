@@ -2,9 +2,9 @@
 
 int main()
 {
-    printf("This is my first C Program");
-    printf("Hello World!!");
-    printf("Hello Ahmed Imtiaz");
+    printf("This is my first C Program. ");
+    printf("Hello World!! ");
+    printf("Hello Ahmed Imtiaz.");
 
     return 0;
 }

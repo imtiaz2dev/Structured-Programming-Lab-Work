@@ -2,7 +2,7 @@
 
 int main(){
     float C,F;
-printf("Enter Celsisus: ");
+printf("Enter Celsius: ");
 scanf("%f",&C);
 F=(C*1.8)+32;
 

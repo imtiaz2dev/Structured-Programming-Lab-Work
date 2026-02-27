@@ -1,13 +1,11 @@
 #include <stdio.h>
 
 int main() {
-    int x,i,z;
+    int x,y,z;
     scanf("%d",&x);
-
-    for(i = x; i > 0; i=i/10){
-         z=i % 10;
-        printf("%d",z);
+for(y = x; y > 0; y=y/10){
+    z=y % 10;
+    printf("%d",z);
     }
-
-    return 0;
+return 0;
 }

@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int ids[100];
+char names[100][50];
+float basicSalaries[100];
+int totalEntries = 0;
+
+int sumAllSalaries(int n) {
+    if (n <= 0) {
+        return 0;
+    }
+    return basicSalaries[n - 1] + sumAllSalaries(n - 1);
+}
+
+int addRecord() {
+    printf("Enter Employee ID: ");
+    scanf("%d", &ids[totalEntries]);
+    getchar();
+
+    printf("Enter Name: ");
+    fgets(names[totalEntries], 50, stdin);
+    names[totalEntries][strcspn(names[totalEntries], "\n")] = 0;
+
+    printf("Enter Basic Salary: ");
+    scanf("%f", &basicSalaries[totalEntries]);
+
+    totalEntries++;
+    printf("\nRecord Added Successfully!\n");
+}
+
+int displayRecords() {
+    if (totalEntries == 0) {
+        printf("\nNo records to show!\n");
+        return 0;
+    }
+
+    printf("\nID\tName\t\t\tSalary\n");
+    printf("------------------------------------\n");
+    for (int i = 0; i < totalEntries; i++) {
+        printf("%d\t%-15s\t%.2f\n", ids[i], names[i], basicSalaries[i]);
+    }
+}
+
+int searchRecord() {
+    char sName[50];
+    int found = 0;
+    printf("Enter Name to search: ");
+    getchar();
+    fgets(sName, 50, stdin);
+    sName[strcspn(sName, "\n")] = 0;
+
+    for (int i = 0; i < totalEntries; i++) {
+        if (strcmp(names[i], sName) == 0) {
+            printf("\nFound! ID: %d, Name: %s, Basic Salary: %.2f\n", ids[i], names[i], basicSalaries[i]);
+            found = 1;
+            break;
+        }
+    }
+    if (!found) printf("\nEmployee not found!\n");
+}
+
+int main() {
+    int choice;
+
+    while (1) {
+        printf("\n### Salary Management System ###");
+        printf("\n1. Add Employee Salary");
+        printf("\n2. Display All Records");
+        printf("\n3. Search by Name");
+        printf("\n4. Calculate Total Salary");
+        printf("\n5. Exit");
+        printf("\nChoice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addRecord();
+                break;
+            case 2:
+                displayRecords();
+                break;
+            case 3:
+                searchRecord();
+                break;
+            case 4:
+                printf("\nTotal Salary is: %.2f\n", (float)sumAllSalaries(totalEntries));
+                break;
+            case 5:
+                exit(0);
+            default:
+                printf("\nInvalid choice!\n");
+        }
+    }
+    return 0;
+}
